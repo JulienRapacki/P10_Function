@@ -1,2 +1,2 @@
-pandas
-azure.functions
+azure_storage==0.37.0
+pandas==1.4.2
