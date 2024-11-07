@@ -1,2 +1,3 @@
-azure_storage
+azure.functions
+azure-storage-blob
 pandas
