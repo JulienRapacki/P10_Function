@@ -1,0 +1,23 @@
+{
+  "bindings": [
+    {
+      "name": "req",
+      "type": "httpTrigger",
+      "direction": "in",
+      "authLevel": "function",
+      "methods": ["get"]
+    },
+    {
+      "name": "inputBlob",
+      "type": "blob",
+      "path": "p10clicks/clicks_sample.csv",
+      "connection": "DefaultEndpointsProtocol=https;AccountName=iaprojet9;AccountKey=FRefYH7L7rj9B7hWclYNiRoOPOcK0z46/6NvT50aEvHM+cn4P/1+WEkFNyweLJk4E0qqYa6HMWAX+AStGbeb1Q==;EndpointSuffix=core.windows.net",
+      "direction": "in"
+    },
+    {
+      "name": "$return",
+      "type": "http",
+      "direction": "out"
+    }
+  ]
+}

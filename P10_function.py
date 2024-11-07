@@ -1,7 +1,9 @@
 import json
+import pandas as pd
+from io import StringIO
 import azure.functions as func
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest, inputBlob: func.InputStream) -> func.HttpResponse:
     user_id = req.params.get('user_id')
     if not user_id:
         return func.HttpResponse(
@@ -9,7 +11,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             status_code=400
         )
     
-    # Placeholder: recommandation d'exemple
-    recommandations = ["item_1", "item_2", "item_3", "item_4", "item_5"]
+    # Charger les données depuis l’input binding
+    data = inputBlob.read().decode('utf-8')
+    df = pd.read_csv(StringIO(data))
 
-    return func.HttpResponse(json.dumps(recommandations), mimetype="application/json")
+    # Logique de recommandation
+    recommendations = df[df['user_id'] == int(user_id)]['click_article_id'].head(5).tolist()
+
+    return func.HttpResponse(json.dumps(recommendations), mimetype="application/json")
